@@ -12,12 +12,15 @@ source:
 build:
   number: 4
   skip: True  # [win]
+  run_exports:
+    # no info.  Leaving at default behavior.
+    - {{ pin_subpackage('jasper') }}
 
 requirements:
   build:
-    - jpeg 9*
-  run:
-    - jpeg 9*
+    - {{ compiler('c') }}
+  host:
+    - jpeg
 
 test:
   commands:
