@@ -1,16 +1,16 @@
-{% set version = "1.900.1" %}
+{% set version = "2.0.14" %}
 
 package:
   name: jasper
   version: {{ version }}
 
 source:
-  fn: jasper-{{ version }}.zip
-  url: http://www.ece.uvic.ca/~frodo/jasper/software/jasper-{{ version }}.zip
-  sha256: 6b905a9c2aca2e275544212666eefc4eb44d95d0a57e4305457b407fe63f9494
+  fn: jasper-{{ version }}.tar.gz
+  url: http://www.ece.uvic.ca/~frodo/jasper/software/jasper-{{ version }}.tar.gz
+  sha256: 2a1f61e55afe8b4ce8115e1508c5d7cb314d56dfcc2dd323f90c072f88ccf57b
 
 build:
-  number: 4
+  number: 0
   skip: True  # [win]
   run_exports:
     # no info.  Leaving at default behavior.
@@ -18,9 +18,24 @@ build:
 
 requirements:
   build:
+    - cmake
     - {{ compiler('c') }}
+    - {{ cdt('mesa-libgl-devel') }}     # [linux]
+    - {{ cdt('mesa-dri-drivers') }}     # [linux]
+    - {{ cdt('libxdamage') }}           # [linux]
+    - {{ cdt('libselinux') }}           # [linux]
+    - {{ cdt('libxext') }}              # [linux]
+    - {{ cdt('libxfixes') }}            # [linux]
+    - {{ cdt('libxcb') }}               # [linux]
+    - {{ cdt('libxau') }}               # [linux]
+    - {{ cdt('libxxf86vm') }}           # [linux]
   host:
     - jpeg
+    - libglu                            # [linux]
+    - freeglut                          # [linux]
+  run:
+    - {{ pin_compatible('libglu') }}    # [linux]
+    - {{ pin_compatible('freeglut') }}  # [linux]
 
 test:
   commands:
@@ -30,6 +45,7 @@ test:
 
 about:
   home: http://www.ece.uvic.ca/~frodo/jasper/
+  dev_url: https://github.com/mdadams/jasper
   license: JasPer 2.0
   license_file: LICENSE
   summary: 'A reference implementation of the codec specified in the JPEG-2000 Part-1 standard.'
