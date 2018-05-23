@@ -20,7 +20,6 @@ build:
 
 requirements:
   build:
-    - cmake
     - {{ compiler('c') }}
     - {{ cdt('mesa-libgl-devel') }}     # [linux]
     - {{ cdt('mesa-dri-drivers') }}     # [linux]
@@ -31,6 +30,8 @@ requirements:
     - {{ cdt('libxcb') }}               # [linux]
     - {{ cdt('libxau') }}               # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
+    - cmake
+    - make
   host:
     - jpeg
     - libglu                            # [linux]
