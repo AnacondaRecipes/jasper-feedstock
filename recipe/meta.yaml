@@ -17,6 +17,8 @@ build:
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
+  missing_dso_whitelist:                                         # [osx]
+    - /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT  # [osx]
 
 requirements:
   build:
@@ -29,6 +31,7 @@ requirements:
     - {{ cdt('libxfixes') }}            # [linux]
     - {{ cdt('libxcb') }}               # [linux]
     - {{ cdt('libxau') }}               # [linux]
+    - {{ cdt('libxi') }}                # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
     - cmake
     - make
