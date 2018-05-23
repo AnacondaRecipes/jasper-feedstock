@@ -8,9 +8,11 @@ source:
   fn: jasper-{{ version }}.tar.gz
   url: http://www.ece.uvic.ca/~frodo/jasper/software/jasper-{{ version }}.tar.gz
   sha256: 2a1f61e55afe8b4ce8115e1508c5d7cb314d56dfcc2dd323f90c072f88ccf57b
+  patches:
+    - CVE-2018-9055-330751ce.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   run_exports:
     # no info.  Leaving at default behavior.
