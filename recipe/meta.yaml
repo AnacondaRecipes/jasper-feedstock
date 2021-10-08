@@ -16,8 +16,10 @@ build:
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
-  missing_dso_whitelist:                                         # [osx]
+  missing_dso_whitelist:                                         # [osx or linux]
     - /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT  # [osx]
+    - $RPATH/libm.so.6  # [linux]
+    - $RPATH/libc.so.6  # [linux]
   ignore_run_exports:
     - jpeg
 
