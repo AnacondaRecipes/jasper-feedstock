@@ -13,6 +13,7 @@ source:
 
 build:
   number: 2
+  skip: True  # [s390x]
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
@@ -22,6 +23,7 @@ build:
     - $RPATH/libc.so.6  # [linux]
   ignore_run_exports:
     - jpeg
+    - pcre  # [ppc64le]
 
 requirements:
   build:
@@ -36,6 +38,7 @@ requirements:
     - {{ cdt('libxau') }}               # [linux]
     - {{ cdt('libxi') }}                # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
+    - {{ cdt('libxshmfence-devel') }}    # [linux and ppc64le]
     - cmake
     - make                              # [not win]
     - patch                             # [not win]
@@ -44,8 +47,10 @@ requirements:
     - jpeg
     - libglu                            # [linux]
     - freeglut                          # [linux or win]
+    - pcre  # [ppc64le]
   run:
     - jpeg
+    - pcre  # [ppc64le]
     - {{ pin_compatible('libglu') }}    # [linux]
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 
