@@ -6,19 +6,24 @@ package:
 
 source:
   fn: jasper-{{ version }}.tar.gz
-  url: http://www.ece.uvic.ca/~frodo/jasper/software/jasper-{{ version }}.tar.gz
+  url: https://ftp.osuosl.org/pub/blfs/conglomeration/jasper/jasper-{{ version }}.tar.gz
   sha256: 2a1f61e55afe8b4ce8115e1508c5d7cb314d56dfcc2dd323f90c072f88ccf57b
   patches:
     - CVE-2018-9055-330751ce.patch
 
 build:
-  number: 1
-  skip: True  # [win]
+  number: 2
+  skip: True  # [s390x]
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
-  missing_dso_whitelist:                                         # [osx]
+  missing_dso_whitelist:                                         # [osx or linux]
     - /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT  # [osx]
+    - $RPATH/libm.so.6  # [linux]
+    - $RPATH/libc.so.6  # [linux]
+  ignore_run_exports:
+    - jpeg
+    - pcre  # [ppc64le]
 
 requirements:
   build:
@@ -33,21 +38,26 @@ requirements:
     - {{ cdt('libxau') }}               # [linux]
     - {{ cdt('libxi') }}                # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
+    - {{ cdt('libxshmfence-devel') }}    # [linux and ppc64le]
     - cmake
-    - make
+    - make                              # [not win]
+    - patch                             # [not win]
+    - m2-patch                          # [win]
   host:
     - jpeg
     - libglu                            # [linux]
-    - freeglut                          # [linux]
+    - freeglut                          # [linux or win]
+    - pcre  # [ppc64le]
   run:
+    - jpeg
+    - pcre  # [ppc64le]
     - {{ pin_compatible('libglu') }}    # [linux]
-    - {{ pin_compatible('freeglut') }}  # [linux]
+    - {{ pin_compatible('freeglut') }}  # [linux or win]
 
 test:
   commands:
+    - if not exist %LIBRARY_BIN%\\jasper.dll exit 1  # [win]
     - jasper --version
-    - conda inspect linkages -p $PREFIX jasper  # [not win]
-    - conda inspect objects -p $PREFIX jasper  # [osx]
 
 about:
   home: http://www.ece.uvic.ca/~frodo/jasper/
