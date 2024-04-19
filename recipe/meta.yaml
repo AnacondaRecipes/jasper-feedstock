@@ -44,7 +44,6 @@ requirements:
     - jpeg
     - libglu                            # [linux]
     - freeglut                          # [linux or win]
-    - zstd                              # [osx]
   run:
     - jpeg
     - {{ pin_compatible('libglu') }}    # [linux]
