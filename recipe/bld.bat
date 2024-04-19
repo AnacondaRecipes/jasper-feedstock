@@ -2,13 +2,15 @@
 set CC=cl.exe
 set CXX=cl.exe
 
-mkdir build
-cd build
+mkdir build_src
+cd build_src
 cmake ^
     -G "Ninja" ^
+    -DALLOW_IN_SOURCE_BUILD=ON ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DBUILD_SHARED_LIBS=ON ^
+    -DJAS_STDC_VERSION=201112L ^
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON ^
     -DJAS_ENABLE_AUTOMATIC_DEPENDENCIES=False ^
     %SRC_DIR%
