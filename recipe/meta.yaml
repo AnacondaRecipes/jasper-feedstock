@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://ftp2.osuosl.org/pub/blfs/conglomeration/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 1263d70c663f1b5a4ed2a428371486091d282af96b7270e8b1cbfcbf44ad95ff
+  url: https://github.com/jasper-software/jasper/releases/download/version-{{ version }}/jasper-{{ version }}.tar.gz
+  sha256: 68131ddf9f62d6944cc4c58977dd177c283adb0228140b76382a2dbdadadaa4f
 
 build:
   number: 0
