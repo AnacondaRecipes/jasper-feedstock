@@ -40,7 +40,7 @@ requirements:
     - make                              # [not win]
   host:
     - jpeg {{ jpeg }}
-    - libglu                            # [linux]
+    - libglu 9.0.0                     # [linux]
     - freeglut                          # [linux or win]
   run:
     - jpeg
