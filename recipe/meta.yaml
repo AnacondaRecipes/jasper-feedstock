@@ -19,8 +19,6 @@ build:
     - /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT  # [osx]
     - $RPATH/libm.so.6  # [linux]
     - $RPATH/libc.so.6  # [linux]
-  ignore_run_exports:
-    - jpeg
 
 requirements:
   build:
