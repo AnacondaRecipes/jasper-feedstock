@@ -41,7 +41,7 @@ requirements:
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                     # [linux]
-    - freeglut                          # [linux or win]
+    - freeglut 3.0.0                    # [linux or win]
   run:
     - jpeg
     - {{ pin_compatible('libglu') }}    # [linux]
