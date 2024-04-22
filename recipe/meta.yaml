@@ -39,7 +39,7 @@ requirements:
     - ninja                             # [win]
     - make                              # [not win]
   host:
-    - jpeg
+    - jpeg {{ jpeg }}
     - libglu                            # [linux]
     - freeglut                          # [linux or win]
   run:
