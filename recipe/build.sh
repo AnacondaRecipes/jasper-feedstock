@@ -16,4 +16,5 @@ cmake -G "Ninja" \
     "${CMAKE_PLATFORM_FLAGS[@]}" ..
 
 cmake --build . --config Release --target=install --parallel ${CPU_COUNT}
+ctest --output-on-failure || true
 cd ..
