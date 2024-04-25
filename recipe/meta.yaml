@@ -36,7 +36,10 @@ requirements:
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
-    - freeglut 3.0.0                    # [linux or win]
+    - freeglut 3.0.0                    # [linux]
+    # The file https://anaconda.org/anaconda/freeglut/3.0.0/download/win-64/freeglut-3.0.0-h6538335_5.tar.bz2
+    # contains Library\include\GL\glut.h
+    - freeglut 3.0.0 h6538335_5         # [win]
   run:
     - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
