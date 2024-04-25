@@ -34,8 +34,7 @@ requirements:
     - {{ cdt('libxi') }}                # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
     - cmake
-    - ninja                             # [win]
-    - make                              # [not win]
+    - ninja
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                     # [linux]

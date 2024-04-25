@@ -5,7 +5,8 @@ set -eo pipefail
 declare -a CMAKE_PLATFORM_FLAGS
 
 mkdir build_shared && cd $_
-cmake ${CMAKE_ARGS} \
+cmake -G "Ninja" \
+    ${CMAKE_ARGS} \
     -DALLOW_IN_SOURCE_BUILD=ON \
     -DCMAKE_PREFIX_PATH=$PREFIX \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
@@ -13,6 +14,6 @@ cmake ${CMAKE_ARGS} \
     -DJAS_ENABLE_LIBHEIF=OFF \
     -DJAS_ENABLE_DOC=OFF \
     "${CMAKE_PLATFORM_FLAGS[@]}" ..
-make -j${CPU_COUNT}
-make install
+
+cmake --build . --config Release --target=install --parallel ${CPU_COUNT}
 cd ..

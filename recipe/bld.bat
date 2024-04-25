@@ -1,6 +1,7 @@
 :: MSVC is preferred.
 set CC=cl.exe
 set CXX=cl.exe
+set JPEG_LIB=%LIBRARY_LIB%\libjpeg.lib
 
 mkdir build_src
 cd build_src
@@ -13,7 +14,6 @@ cmake ^
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON ^
     -DJAS_ENABLE_LIBHEIF=OFF ^
     -DJAS_ENABLE_DOC=OFF ^
-    -DJAS_ENABLE_LIBJPEG=ON ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
