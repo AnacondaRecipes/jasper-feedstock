@@ -13,6 +13,7 @@ cmake -G "Ninja" \
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON \
     -DJAS_ENABLE_LIBHEIF=OFF \
     -DJAS_ENABLE_DOC=OFF \
+    -DJAS_PACKAGING=ON \
     "${CMAKE_PLATFORM_FLAGS[@]}" ..
 
 cmake --build . --config Release --target=install --parallel ${CPU_COUNT}

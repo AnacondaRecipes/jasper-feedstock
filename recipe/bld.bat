@@ -2,8 +2,11 @@
 set CC=cl.exe
 set CXX=cl.exe
 
+dir  /s %LIBRARY_INC%
+
 mkdir build_src
 cd build_src
+
 cmake ^
     -G "Ninja" ^
     %CMAKE_ARGS% ^
