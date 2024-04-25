@@ -36,17 +36,26 @@ requirements:
     - cmake
     - ninja
   host:
-    - jpeg {{ jpeg }}                   # [unix]
+    - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
-    - freeglut 3.0.0                    # [linux]
+    - freeglut 3.0.0                    # [linux or win]
   run:
     - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
-    - {{ pin_compatible('freeglut') }}  # [linux]
+    - {{ pin_compatible('freeglut') }}  # [linux or win]
 
 test:
   commands:
-    - if not exist %LIBRARY_BIN%\\jasper.dll exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\jasper.dll exit 1            # [win]
+    - if not exist %LIBRARY_BIN%\\jasper.exe exit 1            # [win]
+    - if not exist %LIBRARY_LIB%\\pkgconfig\\jasper.pc exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\jasper.lib exit 1            # [win]
+    - if not exist %LIBRARY_INC%\\jasper\\jasper.h exit 1      # [win]
+    - test -f $PREFIX/include/jasper.h                         # [osx]
+    - test -f $PREFIX/lib/libjasper.dylib                      # [osx]
+    - test -f $PREFIX/lib/libjasper.so                         # [linux]
+    - test -f $PREFIX/lib/libjasper.so.7                       # [linux]
+    - test -f $PREFIX/lib/libjasper.so.7.0.0                   # [linux]
     - jasper --version
 
 about:
