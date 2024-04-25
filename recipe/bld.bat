@@ -15,6 +15,7 @@ cmake ^
     -DJAS_ENABLE_LIBHEIF=OFF ^
     -DJAS_ENABLE_DOC=OFF ^
     -DJPEG_LIBRARY_RELEASE=%LIBRARY_LIB%\libjpeg.lib ^
+    -DGLUT_INCLUDE_DIR=%LIBRARY_INC%
     %SRC_DIR%
 if errorlevel 1 exit 1
 
