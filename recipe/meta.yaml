@@ -36,13 +36,13 @@ requirements:
     - cmake
     - ninja
   host:
-    - jpeg {{ jpeg }}
-    - libglu 9.0.0                     # [linux]
-    - freeglut 3.0.0                    # [linux or win]
+    - jpeg {{ jpeg }}                   # [unix]
+    - libglu 9.0.0                      # [linux]
+    - freeglut 3.0.0                    # [linux]
   run:
     - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
-    - {{ pin_compatible('freeglut') }}  # [linux or win]
+    - {{ pin_compatible('freeglut') }}  # [linux]
 
 test:
   commands:

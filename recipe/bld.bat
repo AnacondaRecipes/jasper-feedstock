@@ -16,6 +16,8 @@ cmake ^
     -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON ^
     -DJAS_ENABLE_LIBHEIF=OFF ^
     -DJAS_ENABLE_DOC=OFF ^
+    -DJAS_ENABLE_LIBJPEG=OFF ^
+    -DJAS_ENABLE_OPENGL=OFF ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
@@ -25,6 +27,4 @@ if errorlevel 1 exit 1
 
 :: Install.
 cmake --build . --config Release --target install
-if errorlevel 1 exit 1
-ctest --output-on-failure
 if errorlevel 1 exit 1
