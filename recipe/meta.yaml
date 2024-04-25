@@ -34,11 +34,11 @@ requirements:
     - cmake
     - ninja
   host:
-    - libjpeg-turbo 2
+    - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
     - freeglut 3.0.0                    # [linux or win]
   run:
-    - libjpeg-turbo >=2.0.0,<3.0a0
+    - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 

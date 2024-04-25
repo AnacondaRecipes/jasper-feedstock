@@ -1,8 +1,6 @@
 :: MSVC is preferred.
 set CC=cl.exe
 set CXX=cl.exe
-set JPEG_LIB=%LIBRARY_LIB%\libjpeg.lib
-set CMAKE_ARGS=%CMAKE_ARGS% %JPEG_LIB%
 
 mkdir build_src
 cd build_src
