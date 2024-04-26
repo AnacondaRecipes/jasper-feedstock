@@ -21,6 +21,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - {{ cdt('mesa-libgl-devel') }}     # [linux]
     - {{ cdt('mesa-dri-drivers') }}     # [linux]
     - {{ cdt('libxdamage') }}           # [linux]
@@ -31,15 +32,13 @@ requirements:
     - {{ cdt('libxau') }}               # [linux]
     - {{ cdt('libxi') }}                # [linux]
     - {{ cdt('libxxf86vm') }}           # [linux]
-    - cmake
+    - cmake 3.22
     - ninja-base
+    - pkg-config
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
-    - freeglut 3.0.0                    # [linux]
-    # The file https://anaconda.org/anaconda/freeglut/3.0.0/download/win-64/freeglut-3.0.0-h6538335_5.tar.bz2
-    # contains Library\include\GL\glut.h
-    - freeglut 3.0.0 h6538335_5         # [win]
+    - freeglut 3.0.0                    # [linux or win]
   run:
     - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
