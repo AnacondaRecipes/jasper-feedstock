@@ -26,7 +26,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
     - {{ cdt('mesa-libgl-devel') }}    # [linux]
     - {{ cdt('mesa-dri-drivers') }}    # [linux]
     - {{ cdt('libxdamage') }}          # [linux]
@@ -67,7 +66,8 @@ test:
     - test -f $PREFIX/lib/libjasper.so.7                       # [linux]
     - test -f $PREFIX/lib/libjasper.so.7.0.0                   # [linux]
     - jasper --version
-    - jiv --version
+    # Skip running jiv on linux platforms because freeglut fails to open display
+    - jiv --version                                            # [win]
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
