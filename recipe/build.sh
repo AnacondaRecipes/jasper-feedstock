@@ -2,6 +2,9 @@
 
 set -eo pipefail
 
+export PKG_CONFIG_PATH="${BUILD_PREFIX}/bin/pkg-config:${BUILD_PREFIX}/lib/pkgconfig:${PREFIX}/bin/pkg-config:${PREFIX}/lib/pkg-config"
+export PKG_CONFIG_EXECUTABLE=${PREFIX}/bin/pkg-config
+
 declare -a CMAKE_PLATFORM_FLAGS
 
 mkdir build_shared && cd $_
