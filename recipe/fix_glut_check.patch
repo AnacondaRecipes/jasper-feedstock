@@ -1,0 +1,28 @@
+From ce84a96eea411a2f2a5ee02690be7fce65bd9aba Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko <skupriienko@anaconda.com>
+Date: Wed, 1 May 2024 10:34:00 +0300
+Subject: [PATCH] Fix check location of glut.h
+
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index aa155e8..23c0e26 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -703,9 +703,10 @@ if(JAS_ENABLE_OPENGL)
+ 		jas_get_includes_from_targets(CMAKE_REQUIRE_INCLUDES
+ 		  OpenGL::GL OpenGL::GLU GLUT::GLUT)
+ 		message("CMAKE_REQUIRE_INCLUDES ${CMAKE_REQUIRE_INCLUDES}")
+-		check_include_files(GL/glut.h JAS_HAVE_GL_GLUT_H)
++		#check_include_files(GL/glut.h JAS_HAVE_GL_GLUT_H)
+ 		check_include_files(GLUT/glut.h JAS_HAVE_GLUT_GLUT_H)
+ 		check_include_files(glut.h JAS_HAVE_GLUT_H)
++		set(JAS_HAVE_GL_GLUT_H 1)
+ 		if(JAS_HAVE_GL_GLUT_H OR JAS_HAVE_GLUT_GLUT_H OR JAS_HAVE_GLUT_H)
+ 			set(JAS_OPENGL_TARGETS GLUT::GLUT OpenGL::GL)
+ 			if (TARGET OpenGL::GLU)
+-- 
+2.44.0
+

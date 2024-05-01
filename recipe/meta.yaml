@@ -8,6 +8,11 @@ package:
 source:
   url: https://github.com/jasper-software/jasper/releases/download/version-{{ version }}/jasper-{{ version }}.tar.gz
   sha256: 68131ddf9f62d6944cc4c58977dd177c283adb0228140b76382a2dbdadadaa4f
+  patches:  # [win]
+    # Disable check_include_files(GL/glut.h JAS_HAVE_GL_GLUT_H)
+    # and set JAS_HAVE_GL_GLUT_H to 1. This helps pkg-config to find
+    # freeglut.lib's copies glut.lib and freeglutd.lib
+    - fix_glut_check.patch  # [win]
 
 build:
   number: 0
@@ -22,19 +27,20 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ cdt('mesa-libgl-devel') }}     # [linux]
-    - {{ cdt('mesa-dri-drivers') }}     # [linux]
-    - {{ cdt('libxdamage') }}           # [linux]
-    - {{ cdt('libselinux') }}           # [linux]
-    - {{ cdt('libxext') }}              # [linux]
-    - {{ cdt('libxfixes') }}            # [linux]
-    - {{ cdt('libxcb') }}               # [linux]
-    - {{ cdt('libxau') }}               # [linux]
-    - {{ cdt('libxi') }}                # [linux]
-    - {{ cdt('libxxf86vm') }}           # [linux]
-    - cmake 3.22
+    - {{ cdt('mesa-libgl-devel') }}    # [linux]
+    - {{ cdt('mesa-dri-drivers') }}    # [linux]
+    - {{ cdt('libxdamage') }}          # [linux]
+    - {{ cdt('libselinux') }}          # [linux]
+    - {{ cdt('libxext') }}             # [linux]
+    - {{ cdt('libxfixes') }}           # [linux]
+    - {{ cdt('libxcb') }}              # [linux]
+    - {{ cdt('libxau') }}              # [linux]
+    - {{ cdt('libxi') }}               # [linux]
+    - {{ cdt('libxxf86vm') }}          # [linux]
+    - cmake
     - ninja-base
     - pkg-config
+    - m2-patch                          # [win]
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
@@ -48,8 +54,10 @@ test:
   commands:
     - if not exist %LIBRARY_BIN%\\jasper.dll exit 1            # [win]
     - if not exist %LIBRARY_BIN%\\jasper.exe exit 1            # [win]
+    - if not exist %LIBRARY_BIN%\\jiv.exe exit 1               # [win]
     - if not exist %LIBRARY_LIB%\\pkgconfig\\jasper.pc exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\jasper.lib exit 1            # [win]
+    - if not exist %LIBRARY_LIB%\\glut.lib exit 1              # [win]
     - if not exist %LIBRARY_INC%\\jasper\\jasper.h exit 1      # [win]
     - test -f $PREFIX/include/jasper/jasper.h                  # [unix]
     - test -f $PREFIX/lib/libjasper.dylib                      # [osx]
@@ -59,6 +67,7 @@ test:
     - test -f $PREFIX/lib/libjasper.so.7                       # [linux]
     - test -f $PREFIX/lib/libjasper.so.7.0.0                   # [linux]
     - jasper --version
+    - jiv --version
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
