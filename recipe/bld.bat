@@ -6,7 +6,7 @@ REM The pkg-config path and executable are needed to find the freeglut header an
 set PKG_CONFIG_PATH="%LIBRARY_BIN%\pkgconfig;%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig;%BUILD_PREFIX%\Library\bin\pkgconfig"
 set PKG_CONFIG_EXECUTABLE=%LIBRARY_BIN%\pkg-config
 
-REM The default %LIBRARY_LIB%\freeglut.lib can't be found by CMake even is DGLUT_glut_LIBRARY_RELEASE is defined.
+REM The default %LIBRARY_LIB%\freeglut.lib can't be found by CMake even ig GLUT_glut_LIBRARY_RELEASE is defined.
 REM While linking C executable src\app\jiv.exe two files are required glut.lib AND(!) freeglutd.lib instead of freeglut.lib. 
 REM So we rename freeglut.lib to glut.lib and freeglutd.lib.
 REM At the same time pkg-config is looking for glut.pc but not freeglut.pc. Renaming it fixes the issue.
@@ -39,4 +39,7 @@ if errorlevel 1 exit 1
 
 :: Install.
 cmake --build . --config Release --target install
+if errorlevel 1 exit 1
+
+ctest --output-on-failure
 if errorlevel 1 exit 1

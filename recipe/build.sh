@@ -13,12 +13,11 @@ cmake -G "Ninja" \
     -DALLOW_IN_SOURCE_BUILD=ON \
     -DCMAKE_PREFIX_PATH=$PREFIX \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
-    -DCMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP=ON \
     -DJAS_ENABLE_LIBHEIF=OFF \
     -DJAS_ENABLE_DOC=OFF \
     -DJAS_PACKAGING=ON \
     "${CMAKE_PLATFORM_FLAGS[@]}" ..
 
 cmake --build . --config Release --target=install --parallel ${CPU_COUNT}
-ctest --output-on-failure || true
+ctest --output-on-failure
 cd ..
