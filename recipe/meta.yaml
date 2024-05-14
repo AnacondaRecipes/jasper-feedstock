@@ -10,8 +10,7 @@ source:
   sha256: 6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7
   patches:                  # [win]
     # Disable check_include_files(GL/glut.h JAS_HAVE_GL_GLUT_H)
-    # and set JAS_HAVE_GL_GLUT_H to 1. This helps pkg-config to find
-    # freeglut.lib's copies glut.lib and freeglutd.lib
+    # and set JAS_HAVE_GL_GLUT_H to 1. This helps pkg-config to find glut.lib and freeglutd.lib
     - fix_glut_check.patch  # [win]
 
 build:
@@ -43,7 +42,7 @@ requirements:
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
-    - freeglut 3.0.0                    # [linux or win]
+    - freeglut 3.4.0                    # [linux or win]
   run:
     - jpeg # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
