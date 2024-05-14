@@ -11,8 +11,7 @@ set PKG_CONFIG_EXECUTABLE=%LIBRARY_BIN%\pkg-config
 mkdir build_src
 cd build_src
 
-cmake -LAH ^
-    -G "Ninja" ^
+cmake -G "Ninja" ^
     %CMAKE_ARGS% ^
     -DALLOW_IN_SOURCE_BUILD=ON ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
