@@ -8,10 +8,6 @@ package:
 source:
   url: https://github.com/jasper-software/{{ name }}/releases/download/version-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: 6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7
-  patches:                  # [win]
-    # Disable check_include_files(GL/glut.h JAS_HAVE_GL_GLUT_H)
-    # and set JAS_HAVE_GL_GLUT_H to 1. This helps pkg-config to find glut.lib and freeglutd.lib
-    - fix_glut_check.patch  # [win]
 
 build:
   number: 0
@@ -38,7 +34,6 @@ requirements:
     - cmake
     - ninja-base
     - pkg-config
-    - m2-patch                          # [win]
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.0                      # [linux]
