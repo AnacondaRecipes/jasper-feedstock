@@ -10,58 +10,61 @@ source:
   sha256: 6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7
 
 build:
-  number: 0
+  number: 2
   skip: true  # [s390x]
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
-  missing_dso_whitelist:                                         # [osx]
+  missing_dso_whitelist:  # [osx]
     - /System/Library/Frameworks/GLUT.framework/Versions/A/GLUT  # [osx]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ cdt('mesa-libgl-devel') }}    # [linux]
-    - {{ cdt('mesa-dri-drivers') }}    # [linux]
-    - {{ cdt('libxdamage') }}          # [linux]
-    - {{ cdt('libselinux') }}          # [linux]
-    - {{ cdt('libxext') }}             # [linux]
-    - {{ cdt('libxfixes') }}           # [linux]
-    - {{ cdt('libxcb') }}              # [linux]
-    - {{ cdt('libxau') }}              # [linux]
-    - {{ cdt('libxi') }}               # [linux]
-    - {{ cdt('libxxf86vm') }}          # [linux]
+    # TODO: map CDT libselinux to new X11 package
+    # - { cdt('libselinux') }
+    # TODO: map CDT libxau to new X11 package
+    # - { cdt('libxau') }
+    # TODO: map CDT libxi to new X11 package
+    # - { cdt('libxi') }
     - cmake
     - ninja-base
     - pkg-config
   host:
     - jpeg {{ jpeg }}
-    - libglu 9.0.0                      # [linux]
-    - freeglut 3.4.0                    # [linux or win]
+    - libglu 9.0.0  # [linux]
+    - freeglut 3.4.0  # [linux or win]
+    - libgl-devel
+    - mesa-dri-drivers
+    - xorg-libxdamage
+    - xorg-libxext
+    - xorg-libxfixes
+    - libxcb
+    - xorg-libxxf86vm
   run:
-    - jpeg # pin through run_exports
-    - {{ pin_compatible('libglu') }}    # [linux]
+    - jpeg  # pin through run_exports
+    - {{ pin_compatible('libglu') }}  # [linux]
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 
 test:
   commands:
-    - if not exist %LIBRARY_BIN%\\jasper.dll exit 1            # [win]
-    - if not exist %LIBRARY_BIN%\\jasper.exe exit 1            # [win]
-    - if not exist %LIBRARY_BIN%\\jiv.exe exit 1               # [win]
+    - if not exist %LIBRARY_BIN%\\jasper.dll exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\jasper.exe exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\jiv.exe exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\pkgconfig\\jasper.pc exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\jasper.lib exit 1            # [win]
-    - if not exist %LIBRARY_LIB%\\glut.lib exit 1              # [win]
-    - if not exist %LIBRARY_INC%\\jasper\\jasper.h exit 1      # [win]
-    - test -f $PREFIX/include/jasper/jasper.h                  # [unix]
-    - test -f $PREFIX/lib/libjasper.dylib                      # [osx]
-    - test -f $PREFIX/lib/libjasper.7.dylib                    # [osx]
-    - test -f $PREFIX/lib/libjasper.7.0.0.dylib                # [osx]
-    - test -f $PREFIX/lib/libjasper.so                         # [linux]
-    - test -f $PREFIX/lib/libjasper.so.7                       # [linux]
-    - test -f $PREFIX/lib/libjasper.so.7.0.0                   # [linux]
+    - if not exist %LIBRARY_LIB%\\jasper.lib exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\glut.lib exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\jasper\\jasper.h exit 1  # [win]
+    - test -f $PREFIX/include/jasper/jasper.h  # [unix]
+    - test -f $PREFIX/lib/libjasper.dylib  # [osx]
+    - test -f $PREFIX/lib/libjasper.7.dylib  # [osx]
+    - test -f $PREFIX/lib/libjasper.7.0.0.dylib  # [osx]
+    - test -f $PREFIX/lib/libjasper.so  # [linux]
+    - test -f $PREFIX/lib/libjasper.so.7  # [linux]
+    - test -f $PREFIX/lib/libjasper.so.7.0.0  # [linux]
     - jasper --version
     # Skip running jiv on linux platforms because freeglut fails to open display
-    - jiv --version                                            # [win]
+    - jiv --version  # [win]
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
@@ -75,6 +78,8 @@ about:
     The JasPer Project is an open-source initiative to provide
     a free software-based reference implementation of the codec specified
     in the JPEG-2000 Part-1 standard (i.e., ISO/IEC 15444-1).
+
+
 
 extra:
   recipe-maintainers:
