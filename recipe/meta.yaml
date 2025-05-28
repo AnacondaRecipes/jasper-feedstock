@@ -28,14 +28,6 @@ requirements:
     - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
     - libgl-devel                       # [linux]
-    - mesalib                           # [linux]
-    - xorg-libxau                       # [linux]
-    - xorg-libxi                        # [linux]
-    - xorg-libxdamage                   # [linux]
-    - xorg-libxext                      # [linux]
-    - xorg-libxfixes                    # [linux]
-    - libxcb                            # [linux]
-    - xorg-libxxf86vm                   # [linux]
   run:
     - jpeg  # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
