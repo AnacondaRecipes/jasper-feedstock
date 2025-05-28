@@ -20,12 +20,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    # TODO: map CDT libselinux to new X11 package
-    # - { cdt('libselinux') }
-    # TODO: map CDT libxau to new X11 package
-    # - { cdt('libxau') }
-    # TODO: map CDT libxi to new X11 package
-    # - { cdt('libxi') }
     - cmake
     - ninja-base
     - pkg-config
@@ -35,6 +29,8 @@ requirements:
     - freeglut 3.4.0                    # [linux or win]
     - libgl-devel                       # [linux]
     - mesalib                           # [linux]
+    - xorg-libxau                       # [linux]
+    - xorg-libxi                        # [linux]
     - xorg-libxdamage                   # [linux]
     - xorg-libxext                      # [linux]
     - xorg-libxfixes                    # [linux]
@@ -77,8 +73,6 @@ about:
     The JasPer Project is an open-source initiative to provide
     a free software-based reference implementation of the codec specified
     in the JPEG-2000 Part-1 standard (i.e., ISO/IEC 15444-1).
-
-
 
 extra:
   recipe-maintainers:
