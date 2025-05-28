@@ -25,7 +25,7 @@ requirements:
     - pkg-config
   host:
     - jpeg {{ jpeg }}
-    - libglu 9.0.0                      # [linux]
+    - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
     - libgl-devel                       # [linux]
     - mesalib                           # [linux]
