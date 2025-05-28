@@ -28,6 +28,8 @@ requirements:
     - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
     - libgl-devel                       # [linux]
+    # libXi.so.6, needed by $PREFIX/lib/libglut.so
+    - xorg-libxi                        # [linux]
   run:
     - jpeg  # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
