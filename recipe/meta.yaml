@@ -27,7 +27,6 @@ requirements:
     - jpeg {{ jpeg }}
     - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
-    #- libgl-devel                       # [linux]
     # libXi.so.6, needed by $PREFIX/lib/libglut.so
     - xorg-libxi                        # [linux]
   run:
