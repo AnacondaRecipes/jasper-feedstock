@@ -27,6 +27,7 @@ requirements:
     - jpeg {{ jpeg }}
     - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
+    # libgl-devel is needed for jiv to run on linux. 
     - libgl-devel                       # [linux]
     # libXi.so.6, needed by $PREFIX/lib/libglut.so
     - xorg-libxi                        # [linux]
@@ -36,6 +37,8 @@ requirements:
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 
 test:
+  requires:
+    - mesalib  # [linux]
   commands:
     - if not exist %LIBRARY_BIN%\\jasper.dll exit 1            # [win]
     - if not exist %LIBRARY_BIN%\\jasper.exe exit 1            # [win]
@@ -53,6 +56,7 @@ test:
     - test -f $PREFIX/lib/libjasper.so.7.0.0                   # [linux]
     - jasper --version
     # Skip running jiv on linux platforms because freeglut fails to open display
+    - test -f $PREFIX/bin/jiv                                  # [linux]
     - jiv --version                                            # [win]
     - DISPLAY=localhost:1.0 xvfb-run -a bash -c "jiv --version"                     # [linux]
 
