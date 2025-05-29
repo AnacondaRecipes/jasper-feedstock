@@ -27,6 +27,7 @@ requirements:
     - jpeg {{ jpeg }}
     - libglu 9.0.3                      # [linux]
     - freeglut 3.4.0                    # [linux or win]
+    - libgl-devel                       # [linux]
     # libXi.so.6, needed by $PREFIX/lib/libglut.so
     - xorg-libxi                        # [linux]
   run:
@@ -53,7 +54,7 @@ test:
     - jasper --version
     # Skip running jiv on linux platforms because freeglut fails to open display
     - jiv --version                                            # [win]
-    - DISPLAY=localhost:1.0 xvfb-run -a 'jiv --version'         # [linux]
+    - DISPLAY=localhost:1.0 xvfb-run -a bash -c "jiv --version"                     # [linux]
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
