@@ -37,8 +37,6 @@ requirements:
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 
 test:
-  requires:
-    - mesalib  # [linux]
   commands:
     - if not exist %LIBRARY_BIN%\\jasper.dll exit 1            # [win]
     - if not exist %LIBRARY_BIN%\\jasper.exe exit 1            # [win]
@@ -58,7 +56,6 @@ test:
     # Skip running jiv on linux platforms because freeglut fails to open display
     - test -f $PREFIX/bin/jiv                                  # [linux]
     - jiv --version                                            # [win]
-    - DISPLAY=localhost:1.0 xvfb-run -a bash -c "jiv --version"                     # [linux]
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
