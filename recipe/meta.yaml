@@ -53,7 +53,7 @@ test:
     - jasper --version
     # Skip running jiv on linux platforms because freeglut fails to open display
     - jiv --version                                            # [win]
-    - DISPLAY=localhost:1.0 xvfb-run -a bash -c "jiv --version"  # [linux]
+    - DISPLAY=localhost:1.0 xvfb-run -a 'jiv --version'         # [linux]
 
 about:
   home: https://www.ece.uvic.ca/~frodo/jasper/
