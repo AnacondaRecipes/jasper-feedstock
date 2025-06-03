@@ -26,7 +26,7 @@ requirements:
   host:
     - jpeg {{ jpeg }}
     - libglu 9.0.3                      # [linux]
-    - freeglut 3.4.0                    # [linux or win]
+    - freeglut {{ freeglut }}           # [linux or win]
     # libgl-devel is needed for jiv to run on linux. 
     - libgl-devel                       # [linux]
   run:

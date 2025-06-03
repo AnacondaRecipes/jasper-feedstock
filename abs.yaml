@@ -1,3 +1,2 @@
 channels:
-  - https://staging.continuum.io/prefect/fs/mesalib-feedstock/pr1/b109927
-  - https://staging.continuum.io/prefect/fs/freeglut-feedstock/pr5/2dd042a
+  - https://staging.continuum.io/prefect/fs/mesalib-feedstock/pr1/482c366
