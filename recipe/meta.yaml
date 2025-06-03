@@ -28,7 +28,7 @@ requirements:
     - libglu 9.0.3                      # [linux]
     - freeglut {{ freeglut }}           # [linux or win]
     # libgl-devel is needed for jiv to run on linux. 
-    - libgl-devel                       # [linux]
+    - libgl-devel {{ libgl }}           # [linux]
   run:
     - jpeg  # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
