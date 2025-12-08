@@ -11,7 +11,7 @@ set PKG_CONFIG_EXECUTABLE=%LIBRARY_BIN%\pkg-config
 mkdir build_src
 cd build_src
 
-cmake -G "Ninja" ^
+cmake -G "Ninja" -B build_shared -S %SRC_DIR% ^
     %CMAKE_ARGS% ^
     -DALLOW_IN_SOURCE_BUILD=ON ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
@@ -22,14 +22,13 @@ cmake -G "Ninja" ^
     -DJAS_ENABLE_DOC=OFF ^
     -DJPEG_LIBRARY_RELEASE=%LIBRARY_LIB%\libjpeg.lib ^
     -DGLUT_INCLUDE_DIR:PATH=%LIBRARY_INC% ^
-    -DGLUT_glut_LIBRARY_RELEASE=%LIBRARY_LIB%\glut.lib ^
-    %SRC_DIR%
+    -DGLUT_glut_LIBRARY_RELEASE=%LIBRARY_LIB%\glut.lib
 if errorlevel 1 exit 1
 
 :: Build.
-cmake --build . --config Release
+cmake --build build_shared --config Release
 if errorlevel 1 exit 1
 
 :: Install.
-cmake --build . --config Release --target install
+cmake --build build_shared --config Release --target install
 if errorlevel 1 exit 1
