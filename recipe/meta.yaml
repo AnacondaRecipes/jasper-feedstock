@@ -1,5 +1,5 @@
 {% set name = "jasper" %}
-{% set version = "4.2.4" %}
+{% set version = "4.2.8" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/jasper-software/{{ name }}/releases/download/version-{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7
+  sha256: 98058a94fbff57ec6e31dcaec37290589de0ba6f47c966f92654681a56c71fae
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # no info.  Leaving at default behavior.
     - {{ pin_subpackage('jasper') }}
@@ -19,13 +19,14 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - cmake
     - ninja-base
     - pkg-config
   host:
     - jpeg {{ jpeg }}
-    - libglu 9.0.3                      # [linux]
+    - libglu {{ libglu }}               # [linux]
     - freeglut {{ freeglut }}           # [linux or win]
     # libgl-devel is needed for jiv to run on linux. 
     - libgl-devel {{ libgl }}           # [linux]
@@ -56,9 +57,7 @@ test:
     - jiv --version                                            # [win]
 
 about:
-  home: https://www.ece.uvic.ca/~frodo/jasper/
-  dev_url: https://github.com/jasper-software/jasper
-  doc_url: https://jasper-software.github.io/jasper-manual/latest/html/index.html
+  home: https://www.ece.uvic.ca/~frodo/jasper
   license: JasPer-2.0
   license_family: Other
   license_file: LICENSE.txt
@@ -67,6 +66,8 @@ about:
     The JasPer Project is an open-source initiative to provide
     a free software-based reference implementation of the codec specified
     in the JPEG-2000 Part-1 standard (i.e., ISO/IEC 15444-1).
+  dev_url: https://github.com/jasper-software/jasper
+  doc_url: https://jasper-software.github.io/jasper-manual/latest/html/index.html
 
 extra:
   recipe-maintainers:
