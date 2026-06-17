@@ -1,5 +1,5 @@
 {% set name = "jasper" %}
-{% set version = "4.2.8" %}
+{% set version = "4.2.9" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jasper-software/{{ name }}/releases/download/version-{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 98058a94fbff57ec6e31dcaec37290589de0ba6f47c966f92654681a56c71fae
+  sha256: f71cf643937a5fcaedcfeb30a22ba406912948ad4413148214df280afc425454
 
 build:
   number: 0
@@ -25,13 +25,13 @@ requirements:
     - ninja-base
     - pkg-config
   host:
-    - jpeg {{ jpeg }}
+    - libjpeg-turbo {{ libjpeg_turbo }}
     - libglu {{ libglu }}               # [linux]
     - freeglut {{ freeglut }}           # [linux or win]
     # libgl-devel is needed for jiv to run on linux. 
     - libgl-devel {{ libgl }}           # [linux]
   run:
-    - jpeg  # pin through run_exports
+    - libjpeg-turbo  # pin through run_exports
     - {{ pin_compatible('libglu') }}    # [linux]
     - {{ pin_compatible('freeglut') }}  # [linux or win]
 
